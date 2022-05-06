@@ -16,6 +16,9 @@ const route = require('./routes/index')
 
 route(app);
 
+// require('dotenv').config({ path: __dirname + '/.env' })
+// require('dotenv').config()
+
 //CONNECT MONGODB
 const db = require('./config/db/index')
 //Database connection

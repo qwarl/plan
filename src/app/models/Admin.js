@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const staff = new Schema({
+const Staff = new Schema({
     fullname: {
         type: String, required: true,
     },
@@ -38,4 +38,4 @@ const staff = new Schema({
         type: 'string', enum: ['ADMIN', 'KHO', 'SHIPPER', 'KE TOAN']
     },
 }, { timestamps: true, versionKey: false });
-module.exports = mongoose.model('Staff', staff);
+module.exports = mongoose.model('Staff', Staff,'Staff');

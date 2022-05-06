@@ -1,1 +1,28 @@
-POST http://localhost:3000/admins/login
+
+################################
+# ###Login 
+# post http://localhost:3000/admins/login
+# Content-Type: application/json
+
+# {
+#     "phone":"1",
+#     "password":"1"
+# }
+
+
+
+# get http://localhost:3000/users/login1
+post http://localhost:3000/users/register
+ Content-Type: application/json
+
+{
+    "fullName":"1",
+    "email":"1",
+    "password":"1",
+    "phone":"1",
+    "dateOfBirth":"1",
+    "address":"1",
+    "profilePicture":"1",
+    "spinNum":"1",
+    "myVouchers":"1",
+}

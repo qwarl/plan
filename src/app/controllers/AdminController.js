@@ -9,13 +9,18 @@ class AdminController {
         console.log('hihihi: ', phone, password);
 
         try {
-            const user = await User.findOne({ phone });
+            const user = await Admin.findOne({ phone });
+            // console.log('user: ', user);
             if (!user) {
-                return res.status(400).send({ error: 'Incorrect phone number or password' });
+                return res.status(400).json({success:false, message: 'User not found'});
             }
-            else {
-                return res.status(200).send({ user });
+            else{
+                return res.status(200).json({success:true, message: 'Login success'});
+
             }
+            // else {
+            //     return res.status(200).send({ user });
+            // }
         } catch (error) {
             return res.status(400).send({ error: 'User not found' });
         }

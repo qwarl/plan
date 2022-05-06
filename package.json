@@ -9,6 +9,7 @@
   "author": "Quan",
   "license": "MIT",
   "dependencies": {
+    "argon2": "^0.28.5",
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
