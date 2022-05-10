@@ -6,6 +6,17 @@ const server = http.createServer(app)
 const PORT = 3000
 
 
+// const io = new Server(server, {
+//   cors: {
+//     origin: "http://localhost:3000",
+//     methods: ["GET", "POST"],
+//   },
+// });
+
+//cors config
+var cors = require('cors')
+app.use(cors())
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(express.urlencoded({ extended: true }))
