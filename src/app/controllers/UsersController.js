@@ -70,7 +70,6 @@ class UsersController {
         }
     }
 
-
     // [get] /users/getAll
     async getAll(req, res) {
         // const { userId } = req.user
