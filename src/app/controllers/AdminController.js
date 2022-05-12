@@ -27,11 +27,11 @@ class AdminController {
 
     }
 
-    // [post] /admin/getAll
+    // [get] /admin/getAll
     async getAll(req, res) {
         try {
-            const admins = await Admin.find();
-            res.status(200).send({ admins });
+            const admins = await Admin.find({});
+            res.status(200).send(admins);
         } catch (error) {
             res.status(400).send({ error: 'Error' });
         }
