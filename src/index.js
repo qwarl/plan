@@ -3,7 +3,6 @@ const app = express()
 const path = require('path')
 const http = require('http')
 const server = http.createServer(app)
-const PORT = 3000
 
 
 // const io = new Server(server, {
@@ -17,6 +16,10 @@ const PORT = 3000
 var cors = require('cors')
 app.use(cors())
 
+require('dotenv').config() //load env
+// require('dotenv').config({ path: __dirname + '/.env' }) // maybe not work
+const PORT = process.env.PORT || 3001;
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(express.urlencoded({ extended: true }))
@@ -27,8 +30,7 @@ const route = require('./routes/index')
 
 route(app);
 
-require('dotenv').config({ path: __dirname + '/.env' })
-// require('dotenv').config()
+
 
 //CONNECT MONGODB
 const db = require('./config/db/index')
@@ -37,4 +39,5 @@ db.connect();
 
 app.listen(PORT, () => {
   console.log(`Server listening at http://localhost:${PORT}`)
+  console.log('PORT:', process.env.PORT)
 })

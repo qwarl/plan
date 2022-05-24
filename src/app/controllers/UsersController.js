@@ -23,12 +23,12 @@ class UsersController {
 
             // Return jsonwebtoken
             const accessToken = jwt.sign({ userId: newUser._id },
-                // process.env.ACCESS_TOKEN_SECRET
+                process.env.ACCESS_TOKEN_SECRET
                 //line 26 dont work, replace by line 28
-                'admin1'
+                // 'admin1'
             )
 
-            res.status(200).json({ success: true, message: 'User created successfully' })
+            res.status(200).json({ success: true, message: 'User created successfully', accessToken })
 
         } catch (error) {
             console.log(error)
@@ -39,8 +39,7 @@ class UsersController {
     async login(req, res) {
         const { phone, password } = req.body
         // console.log('info: ', phone, password);
-        console.log('hehehe: ', req.body);
-
+        console.log('info: ', req.body);
         try {
             //check exist user
             const user = await User.findOne({ phone })
@@ -57,12 +56,14 @@ class UsersController {
             // password  correct
             // Return jsonwebtoken
             const accessToken = jwt.sign({ userId: user._id },
-                // process.env.ACCESS_TOKEN_SECRET
+                process.env.ACCESS_TOKEN_SECRET
                 //line 60 dont work, replace by line 62
-                'admin1'
+                //ACCESS_TOKEN_SECRET='admin1'
+                // 'admin1'
             )
-            res.status(200).json({ success: true, message: 'User logged in successfully' }, accessToken)
-
+            // res.status(200).json({ success: true, message: 'User logged in successfully' }, accessToken)
+            res.status(200).json({ success: true, message: 'User logged in successfully', accessToken })
+            console.log('login success');
         } catch (error) {
             console.log(error)
             res.status(500).json({ success: false, message: 'Internal server error' })
@@ -81,6 +82,28 @@ class UsersController {
         } catch (error) {
             res.status(400).json({ success: false, message: 'Error' });
         }
+    }
+    //[post] /users/remove
+    removeUser(req, res) {
+        const { idUser } = req.params
+        console.log('idUser: ', idUser);
+        User.findByIdAndRemove(idUser, (err, user) => {
+            if (err) {
+                res.status(400).json({ success: false, message: 'Error' })
+            }
+            res.status(200).json({ success: true, message: 'User deleted successfully' })
+        })
+    }
+    // [post] /users/update
+    updateUser(req, res) {
+        const idUser  = req.params
+        console.log('idUser: ', idUser);
+        User.findByIdAndUpdate(idUser, req.body, (err, user) => {
+            if (err) {
+                res.status(400).json({ success: false, message: 'Error' })
+            }
+            res.status(200).json({ success: true, message: 'User updated successfully' })
+        })
     }
 }
 
