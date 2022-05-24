@@ -7,6 +7,6 @@ router.post('/register', usersController.register);
 router.post('/login', usersController.login);
 router.get('/getAll', usersController.getAll);
 router.post('/removeUser/:IdUser', usersController.removeUser);
-router.post('/updateUser/:IdUser', usersController.updateUser);
+router.post('/updateUser/:IdUser',authToken, usersController.updateUser);
 
 module.exports=router

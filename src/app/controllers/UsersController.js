@@ -85,9 +85,9 @@ class UsersController {
     }
     //[post] /users/remove
     removeUser(req, res) {
-        const { idUser } = req.params
-        console.log('idUser: ', idUser);
-        User.findByIdAndRemove(idUser, (err, user) => {
+        const  IdUser  = req.params.IdUser
+        console.log('idUser: ', IdUser);
+        User.findByIdAndRemove(IdUser, (err, user) => {
             if (err) {
                 res.status(400).json({ success: false, message: 'Error' })
             }
@@ -96,9 +96,9 @@ class UsersController {
     }
     // [post] /users/update
     updateUser(req, res) {
-        const idUser  = req.params
-        console.log('idUser: ', idUser);
-        User.findByIdAndUpdate(idUser, req.body, (err, user) => {
+        const IdUser  = req.params.IdUser
+        console.log('IdUser: ', IdUser);
+        User.findByIdAndUpdate(IdUser, req.body, (err, user) => {
             if (err) {
                 res.status(400).json({ success: false, message: 'Error' })
             }
