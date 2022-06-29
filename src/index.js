@@ -39,5 +39,5 @@ db.connect();
 
 app.listen(PORT, () => {
   console.log(`Server listening at http://localhost:${PORT}`)
-  console.log('PORT:', process.env.PORT)
+  console.log('Using PORT:', process.env.PORT)
 })
