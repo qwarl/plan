@@ -17,27 +17,27 @@ class CartController {
 
     // [get] carts/:IdUser
     async getCartByIdUser(req, res) {
-        // const carts = []
-        // const IdUser = req.params.IdUser
-        // console.log('IdUser: ', IdUser);
+        const carts = []
+        const IdUser = req.params.IdUser
+        console.log('IdUser: ', IdUser);
 
-        let listProduct = [];
-        Cart.find({ IdUser: req.params.idUser })
-            .populate("idProduct") // key to populate
-            .then(cart => {
-                //cart.foreach(item=> console.log(item.idProduct))
-                //cart.forEach(element => listProduct.push(element.idProduct));
-                // console.log(listProduct);
-                res.json(cart);
-            });
+        // let listProduct = []; //code cua Thong
+        // Cart.find({ IdUser: req.params.idUser })
+        //     .populate("idProduct") // key to populate
+        //     .then(cart => {
+        //         //cart.foreach(item=> console.log(item.idProduct))
+        //         //cart.forEach(element => listProduct.push(element.idProduct));
+        //         // console.log(listProduct);
+        //         res.json(cart);
+        //     });
 
-        // try {
-        //     await Cart.find({ IdUser: IdUser })
-        //         .populate('IdProduct')
-        //     res.status(200).json({ success: true, message: 'Get cart by IdUser successfully', carts })
-        // } catch (error) {
-        //     res.status(400).json({ success: false, message: 'Get cart by IdUser fail' })
-        // }
+        try {
+            await Cart.find({ IdUser: IdUser })
+                .populate('IdProduct')
+            res.status(200).json({ success: true, message: 'Get cart by IdUser successfully', carts })
+        } catch (error) {
+            res.status(400).json({ success: false, message: 'Get cart by IdUser fail' })
+        }
     }
 
     // [post] carts/clearAllItemInCartByIdUser
@@ -47,7 +47,7 @@ class CartController {
         try {
             await Cart.deleteMany({ IdUser: IdUser })
             res.status(200).json({ success: true, message: 'Clear all item in cart by IdUser successfully' })
-                .redirect('/cart/clearAllItemInCartByIdUser')
+                // .redirect('/cart/clearAllItemInCartByIdUser')
         } catch (error) {
             res.status(400).json({ success: false, message: 'Clear all item in cart by IdUser fail' })
         }
@@ -55,13 +55,14 @@ class CartController {
     }
 
     // [post] carts/deleteItemInCart
+    //xoa san pham hien co trong gio hang
     async deleteItemInCart(req, res) {
         const IdProduct = req.params.IdProduct
         console.log('IdProduct: ', IdProduct);
         try {
             await Cart.deleteOne({ IdProduct: IdProduct })
             res.status(200).json({ success: true, message: 'Delete item in cart successfully' })
-                .redirect('/deleteItemInCart')
+                // .redirect('/deleteItemInCart')
         } catch (error) {
             res.status(400).json({ success: false, message: 'Delete item in cart fail' })
         }
@@ -83,7 +84,7 @@ class CartController {
                 )
         }
         else { // update quantity
-            checkCart.itemNum = checkCart.itemNum + req.body.itemNum
+            checkCart.ItemNum = checkCart.ItemNum + req.body.ItemNum
             checkCart.save()
             res.status(200).json({ success: true, message: 'Add new cart successfully' })
                 // .redirect('/addToCart')
@@ -92,6 +93,5 @@ class CartController {
         }       
     }
 }
-
 
 module.exports = new CartController

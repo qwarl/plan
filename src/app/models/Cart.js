@@ -2,18 +2,18 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const Cart = new Schema({
-    idProduct: {
+    IdProduct: {
         type: String,
-        ref: "Product",
+        ref: 'Product',
         required: true,
     },
-    itemNum: {
+    ItemNum: {
         type: Number,
         required: true,
     },
-    idUser: {
+    IdUser: {
         type: String,
-        ref: "User",
+        ref: 'User',
         required: true,
     },
 }, { versionKey: false }) // bỏ __v trong document in mongoose
